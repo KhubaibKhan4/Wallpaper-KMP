@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.LightMode
@@ -25,11 +27,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import io.github.aakira.napier.Napier
 import io.ktor.util.logging.KtorSimpleLogger
 import org.company.app.data.model.Wallpaper
-import org.company.app.data.network.WallpaperClientApi
 import org.company.app.repository.Repository
 import org.company.app.theme.AppTheme
 import org.company.app.theme.LocalThemeIsDark
@@ -38,6 +40,10 @@ import org.company.app.viewmodel.MainViewModel
 
 @Composable
 internal fun App() = AppTheme {
+
+    val state = rememberLazyGridState()
+    val isDesktop = LocalDensity.current.run { state.firstVisibleItemScrollOffset.toDp() } == 0.dp
+
 
     val repository = Repository()
     val viewModel: MainViewModel = MainViewModel(repository)
@@ -50,9 +56,14 @@ internal fun App() = AppTheme {
     }
 
     LaunchedEffect(true) {
-        // wallpaper = viewModel.getWallpaper(page = 1, per_pag = 80)
+        viewModel.getWallpaper(page = 1, per_pag = 80)
+        viewModel.wallpaper.collect { wallpaperValue ->
+            wallpaper = wallpaperValue
+            Napier.d(message = "$wallpaper", throwable = null, tag = "MAIN")
+            KtorSimpleLogger("MAIN")
+        }
 
-        wallpaper = WallpaperClientApi.getWallpapers(80, 1)
+        // wallpaper = WallpaperClientApi.getWallpapers(80, 1)
         Napier.d(message = "$wallpaper", throwable = null, tag = "MAIN")
         KtorSimpleLogger("MAIN")
 
@@ -85,11 +96,10 @@ internal fun App() = AppTheme {
                 )
             }
         }
-        val state = rememberLazyGridState()
+
         wallpaper?.photos?.let { WallpaperList(it, state) }
     }
 }
-
 
 
 internal expect fun openUrl(url: String?)
