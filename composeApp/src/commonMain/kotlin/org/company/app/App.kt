@@ -6,42 +6,60 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.DarkMode
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.LightMode
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import io.github.aakira.napier.Napier
+import io.ktor.util.logging.KtorSimpleLogger
+import org.company.app.data.model.Wallpaper
+import org.company.app.data.network.WallpaperClientApi
+import org.company.app.repository.Repository
 import org.company.app.theme.AppTheme
 import org.company.app.theme.LocalThemeIsDark
+import org.company.app.ui.components.WallpaperList
+import org.company.app.viewmodel.MainViewModel
 
 @Composable
 internal fun App() = AppTheme {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var passwordVisibility by remember { mutableStateOf(false) }
+
+    val repository = Repository()
+    val viewModel: MainViewModel = MainViewModel(repository)
+
+    var data by remember {
+        mutableStateOf(Unit)
+    }
+    var wallpaper by remember {
+        mutableStateOf<Wallpaper?>(null)
+    }
+
+    LaunchedEffect(true) {
+        // wallpaper = viewModel.getWallpaper(page = 1, per_pag = 80)
+
+        wallpaper = WallpaperClientApi.getWallpapers(80, 1)
+        Napier.d(message = "$wallpaper", throwable = null, tag = "MAIN")
+        KtorSimpleLogger("MAIN")
+
+
+    }
+
+
 
     Column(modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing)) {
 
@@ -49,7 +67,7 @@ internal fun App() = AppTheme {
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Login",
+                text = "Wallpaper KMP ${wallpaper?.photos?.get(0)?.photographer}",
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(16.dp)
             )
@@ -67,47 +85,11 @@ internal fun App() = AppTheme {
                 )
             }
         }
-
-        OutlinedTextField(
-            value = email,
-            onValueChange = { email = it },
-            label = { Text("Email") },
-            singleLine = true,
-            modifier = Modifier.fillMaxWidth().padding(16.dp)
-        )
-
-        OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text("Password") },
-            singleLine = true,
-            visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Password
-            ),
-            trailingIcon = {
-                IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
-                    val imageVector = if (passwordVisibility) Icons.Default.Close else Icons.Default.Edit
-                    Icon(imageVector, contentDescription = if (passwordVisibility) "Hide password" else "Show password")
-                }
-            }
-        )
-
-        Button(
-            onClick = { /* Handle login logic here */ },
-            modifier = Modifier.fillMaxWidth().padding(16.dp)
-        ) {
-            Text("Login")
-        }
-
-        TextButton(
-            onClick = { openUrl("https://github.com/terrakok") },
-            modifier = Modifier.fillMaxWidth().padding(16.dp)
-        ) {
-            Text("Open github")
-        }
+        val state = rememberLazyGridState()
+        wallpaper?.photos?.let { WallpaperList(it, state) }
     }
 }
+
+
 
 internal expect fun openUrl(url: String?)
