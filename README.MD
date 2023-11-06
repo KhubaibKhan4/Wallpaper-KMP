@@ -1,5 +1,8 @@
 # Compose Multiplatform Application
 
+## Screenshot
+<img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/1.png" />
+
 ## Before running!
  - check your system with [KDoctor](https://github.com/Kotlin/kdoctor)
  - install JDK 17 on your machine
