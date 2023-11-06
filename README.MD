@@ -2,8 +2,8 @@
 
 ## Screenshot
 <img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/1.png" width="260px" /><img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/2.png" width="260px" />
-<img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/3.png" width="260px" /><img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/4.png" width="260px" />
-<img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/5.png" width="260px" /><img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/6.png" width="260px" />
+<img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/3.png"/><img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/4.png"  />
+<img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/5.png"/><img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/6.png" />
 
 ## Before running!
  - check your system with [KDoctor](https://github.com/Kotlin/kdoctor)
