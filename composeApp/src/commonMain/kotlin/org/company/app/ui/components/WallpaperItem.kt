@@ -2,6 +2,7 @@ package org.company.app.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -28,6 +29,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -37,6 +39,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -44,8 +47,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.navigator.LocalNavigator
 import com.seiko.imageloader.rememberImagePainter
+import io.ktor.http.Url
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.company.app.data.model.Photo
+import org.company.app.ui.navigation.Screens
+import org.company.app.ui.screens.DetailsScreen
 
 
 @Composable
@@ -70,13 +79,20 @@ fun WallpaperList(
 
 @Composable
 fun WallpaperItem(photo: Photo) {
+
+    val navigator = LocalNavigator.current
+
+
     var liked by rememberSaveable {
         mutableStateOf(false)
     }
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(8.dp) // Increased padding for spacing
+            .padding(8.dp)
+            .clickable {
+                navigator?.push(DetailsScreen(photo))
+            }// Increased padding for spacing
     ) {
         // Apply a gradient background
         Box(
@@ -144,5 +160,3 @@ fun WallpaperItem(photo: Photo) {
         }
     }
 }
-
-

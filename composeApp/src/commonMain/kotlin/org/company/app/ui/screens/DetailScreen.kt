@@ -1,5 +1,6 @@
 package org.company.app.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,13 +15,15 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -30,140 +33,178 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import com.seiko.imageloader.rememberImagePainter
+import org.company.app.data.model.Photo
 import org.company.app.theme.LocalThemeIsDark
 
-@Composable
-fun DetailScreen() {
-
-    Column(modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing)) {
-
-        Row(
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = "Wallpaper KMP",
-                style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.padding(16.dp)
-            )
-
-            Spacer(modifier = Modifier.weight(1.0f))
-
-            var isDark by LocalThemeIsDark.current
-            IconButton(
-                onClick = { isDark = !isDark }
-            ) {
-                Icon(
-                    modifier = Modifier.padding(8.dp).size(20.dp),
-                    imageVector = if (isDark) Icons.Default.LightMode else Icons.Default.DarkMode,
-                    contentDescription = null
-                )
-            }
-        }
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(
-                    top = 16.dp,
-                    start = 16.dp,
-                    end = 16.dp,
-                    bottom = 16.dp
-                ), // Add padding for spacing
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Box {
-                // AsyncImage with rounded corners
-//                        AsyncImage(
-//                            model = image ?: "",
-//                            contentDescription = "",
-//                            modifier = Modifier
-//                                .fillMaxWidth()
-//                                .aspectRatio(1f)
-//                                .clip(RoundedCornerShape(8.dp)), // Rounded corners
-//                            contentScale = ContentScale.Crop
-//                        )
-                IconButton(
-                    onClick = {
-
-                    },
-                    modifier = Modifier.align(Alignment.BottomEnd)
-                ) {
-
-                }
-                IconButton(
-                    onClick = {
-
-                    },
-                    modifier = Modifier.align(Alignment.BottomStart)
-                ) {
-
-                }
-            }
 
 
-            Spacer(modifier = Modifier.height(16.dp)) // Add spacing
+data class DetailsScreen(
+    val photo: Photo
+) : Screen {
+    @Composable
+    override fun Content() {
+        val navigator = LocalNavigator.current
+        val uri = photo.url
+        val uriHandler = LocalUriHandler.current
 
-            // Photographer's name
-//                    Text(
-//                        text = photographer ?: "",
-//                        style = TextStyle(
-//                            fontWeight = FontWeight.Bold,
-//                            fontSize = 18.sp, // Customize font size
-//                        )
-//                    )
 
-            Spacer(modifier = Modifier.height(16.dp)) // Add spacing
 
-            // Share and Download buttons
+
+
+        Column(modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing)) {
+
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.Center,
             ) {
-                // Share button
-                Button(
+
+                IconButton(
                     onClick = {
-
-
+                        navigator?.pop()
                     },
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxWidth()
-                        .height(48.dp), // Customize button height
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF007AFF)), // Customize button color
+                    modifier = Modifier.padding(top = 6.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Share, contentDescription = null,
-                        tint = Color.Black
-                    )
-                    Spacer(modifier = Modifier.width(8.dp)) // Add spacing
-                    Text(
-                        text = "Share",
-                        color = Color.Black
+                        imageVector = Icons.Default.KeyboardArrowLeft,
+                        contentDescription = null
                     )
                 }
+                Text(
+                    text = "${photo.photographer}",
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.padding(16.dp)
+                )
 
-                Spacer(modifier = Modifier.width(16.dp)) // Add spacing
+                Spacer(modifier = Modifier.weight(1.0f))
 
-                // Download button
-                Button(
-                    onClick = {
-                    },
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxWidth()
-                        .height(48.dp)
-                        .padding(horizontal = 10.dp), // Customize button height
-                    colors = ButtonDefaults.buttonColors(contentColor = Color(0xFF34C759)), // Customize button color
+                var isDark by LocalThemeIsDark.current
+                IconButton(
+                    onClick = { isDark = !isDark }
                 ) {
-
-                    Spacer(modifier = Modifier.width(8.dp)) // Add spacing
-                    Text(
-                        text = "Download"
+                    Icon(
+                        modifier = Modifier.padding(8.dp).size(20.dp),
+                        imageVector = if (isDark) Icons.Default.LightMode else Icons.Default.DarkMode,
+                        contentDescription = null
                     )
+                }
+            }
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        top = 16.dp,
+                        start = 16.dp,
+                        end = 16.dp,
+                        bottom = 16.dp
+                    ), // Add padding for spacing
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Box {
+                    val image = rememberImagePainter(photo.src.large2x)
+                    Image(
+                        painter = image, contentDescription = "null",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(300.dp)
+                            .clip(RoundedCornerShape(4.dp)),
+
+                        )
+                    IconButton(
+                        onClick = {
+
+
+                        },
+                        modifier = Modifier.align(Alignment.BottomEnd)
+                    ) {
+
+                    }
+                    IconButton(
+                        onClick = {
+
+                        },
+                        modifier = Modifier.align(Alignment.BottomStart)
+                    ) {
+
+                    }
+                }
+
+
+                Spacer(modifier = Modifier.height(16.dp)) // Add spacing
+
+                // Photographer's name
+                Text(
+                    text = photo.photographer ?: "",
+                    style = TextStyle(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp, // Customize font size
+                    )
+                )
+
+                Spacer(modifier = Modifier.height(16.dp)) // Add spacing
+
+                // Share and Download buttons
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    // Share button
+                    Button(
+                        onClick = {
+                            uriHandler.openUri(uri)
+                        },
+                        modifier = Modifier
+                            .wrapContentSize(),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF007AFF)), // Customize button color
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Share, contentDescription = null,
+                            tint = Color.Black
+                        )
+                        Spacer(modifier = Modifier.width(8.dp)) // Add spacing
+                        Text(
+                            text = "Share",
+                            color = Color.Black
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.width(16.dp)) // Add spacing
+
+
+                    // Download button
+                    Button(
+                        onClick = {
+
+                        },
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .padding(horizontal = 10.dp), // Customize button height
+                        colors = ButtonDefaults.buttonColors(contentColor = Color(0xFF34C759)), // Customize button color
+                    ) {
+
+                        Spacer(modifier = Modifier.width(8.dp)) // Add spacing
+                        Text(
+                            text = "Download"
+                        )
+                    }
                 }
             }
         }
     }
+
 }
+
+
+
 
