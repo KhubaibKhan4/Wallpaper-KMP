@@ -11,7 +11,7 @@
 
 # Desktop Screenshots
 <img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/5.png"/><img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/6.png" />
-<img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/55.png"/><img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/65.png" />
+<img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/55.png"/><img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/66.png" />
 
 ## Technology Used
 - Voygar (Navigation Library)
