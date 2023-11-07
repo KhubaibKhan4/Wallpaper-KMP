@@ -1,10 +1,15 @@
 # Compose Multiplatform Application
 
 ## Screenshot
+-Android + iOS Screenshots
 <img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/1.png" width="260px" /><img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/2.png" width="260px" />
 <img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/11.png" width="260px" /><img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/22.png" width="260px" />
+
+-Web Screenshots
 <img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/3.png"/><img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/4.png"  />
 <img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/33.png"/><img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/44.png"  />
+
+-Desktop Screenshots
 <img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/5.png"/><img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/6.png" />
 <img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/55.png"/><img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/65.png" />
 
