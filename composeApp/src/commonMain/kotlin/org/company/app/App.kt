@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.LightMode
@@ -31,11 +29,14 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import io.github.aakira.napier.Napier
 import io.ktor.util.logging.KtorSimpleLogger
+import org.company.app.data.model.Photo
+import org.company.app.data.model.Src
 import org.company.app.data.model.Wallpaper
 import org.company.app.repository.Repository
 import org.company.app.theme.AppTheme
 import org.company.app.theme.LocalThemeIsDark
 import org.company.app.ui.components.WallpaperList
+import org.company.app.ui.navigation.Screens
 import org.company.app.viewmodel.MainViewModel
 
 @Composable
@@ -54,6 +55,7 @@ internal fun App() = AppTheme {
     var wallpaper by remember {
         mutableStateOf<Wallpaper?>(null)
     }
+
 
     LaunchedEffect(true) {
         viewModel.getWallpaper(page = 1, per_pag = 80)
