@@ -2,8 +2,20 @@
 
 ## Screenshot
 <img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/1.png" width="260px" /><img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/2.png" width="260px" />
+<img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/11.png" width="260px" /><img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/22.png" width="260px" />
 <img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/3.png"/><img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/4.png"  />
+<img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/33.png"/><img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/44.png"  />
 <img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/5.png"/><img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/6.png" />
+<img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/55.png"/><img src="https://github.com/KhubaibKhan4/Wallpaper-KMP/blob/master/screenshots/65.png" />
+
+## Technology Used
+- Voygar (Navigation Library)
+- Ktor Client (Http Request Over Internet)
+- ComposeLoader (Displaying Image in KMP)
+- Napier (Logger Library)
+- FeatherIcon (Icons Library)
+- Serialization 
+- ViewModel (KMP View Model Library)
 
 ## Before running!
  - check your system with [KDoctor](https://github.com/Kotlin/kdoctor)
