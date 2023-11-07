@@ -1,18 +1,22 @@
 package org.company.app
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.Navigator
-import io.github.aakira.napier.Napier
-import io.ktor.util.logging.KtorSimpleLogger
-import org.company.app.data.model.Wallpaper
+import org.company.app.data.model.WallpaperState
 import org.company.app.repository.Repository
 import org.company.app.theme.AppTheme
 import org.company.app.ui.screens.HomeScreen
@@ -28,35 +32,35 @@ internal fun App() = AppTheme {
     val repository = Repository()
     val viewModel: MainViewModel = MainViewModel(repository)
 
-    var data by remember {
-        mutableStateOf(Unit)
-    }
-    var wallpaper by remember {
-        mutableStateOf<Wallpaper?>(null)
+
+    var wallpaperState by remember { mutableStateOf<WallpaperState>(WallpaperState.Loading) }
+
+    LaunchedEffect(Unit) {
+        viewModel.getWallpapers(1, 80)
+        viewModel.wallpapers.collect() {
+            wallpaperState = it
+
+        }
     }
 
-
-    LaunchedEffect(true) {
-        viewModel.getWallpaper(page = 1, per_pag = 80)
-        viewModel.wallpaper.collect { wallpaperValue ->
-            wallpaper = wallpaperValue
-            Napier.d(message = "$wallpaper", throwable = null, tag = "MAIN")
-            KtorSimpleLogger("MAIN")
+    when (wallpaperState) {
+        is WallpaperState.Loading -> {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator()
+            }
         }
 
-        // wallpaper = WallpaperClientApi.getWallpapers(80, 1)
-        Napier.d(message = "$wallpaper", throwable = null, tag = "MAIN")
-        KtorSimpleLogger("MAIN")
+        is WallpaperState.Success -> {
+            val wallpaper = (wallpaperState as WallpaperState.Success).wallpaper
+            Navigator(HomeScreen(wallpaper))
+        }
 
+        is WallpaperState.Error -> {
+            Text("Error While Fetching Data.....")
+        }
 
     }
 
-
-
-
-    wallpaper?.let { wallpaper ->
-        Navigator(HomeScreen(wallpaper))
-    }
 
 }
 
