@@ -15,7 +15,7 @@ import io.ktor.serialization.kotlinx.json.json
 import io.ktor.utils.io.errors.IOException
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
-import org.company.app.data.model.Wallpaper
+import org.company.app.domain.model.Wallpaper
 import org.company.app.util.Constant.Companion.API_KEY
 import org.company.app.util.Constant.Companion.AUTHORIZATION
 

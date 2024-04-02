@@ -44,7 +44,7 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import com.seiko.imageloader.rememberImagePainter
-import org.company.app.data.model.Photo
+import org.company.app.domain.model.Photo
 import org.company.app.theme.LocalThemeIsDark
 
 

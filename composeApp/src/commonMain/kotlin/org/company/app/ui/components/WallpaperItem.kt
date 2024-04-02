@@ -52,7 +52,7 @@ import com.seiko.imageloader.rememberImagePainter
 import io.ktor.http.Url
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.company.app.data.model.Photo
+import org.company.app.domain.model.Photo
 import org.company.app.ui.navigation.Screens
 import org.company.app.ui.screens.DetailsScreen
 

@@ -25,7 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
-import org.company.app.data.model.Wallpaper
+import org.company.app.domain.model.Wallpaper
 import org.company.app.theme.LocalThemeIsDark
 import org.company.app.ui.components.WallpaperList
 

@@ -5,7 +5,7 @@ import com.rickclephas.kmm.viewmodel.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import org.company.app.data.model.WallpaperState
+import org.company.app.domain.model.WallpaperState
 import org.company.app.repository.Repository
 
 class MainViewModel(private val repository: Repository) : KMMViewModel() {
