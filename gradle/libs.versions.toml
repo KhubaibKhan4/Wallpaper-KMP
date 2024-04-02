@@ -1,6 +1,6 @@
 [versions]
 
-imageLoader = "1.7.0"
+imageLoader = "1.7.8"
 kmmViewmodelCore = "1.0.0-ALPHA-15"
 kotlin = "1.9.23"
 agp = "8.1.4"
