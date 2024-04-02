@@ -1,4 +1,4 @@
-package org.company.app.ui.components
+package org.company.app.presentation.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -53,8 +53,8 @@ import io.ktor.http.Url
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.company.app.domain.model.Photo
-import org.company.app.ui.navigation.Screens
-import org.company.app.ui.screens.DetailsScreen
+import org.company.app.presentation.ui.navigation.Screens
+import org.company.app.presentation.ui.screens.DetailsScreen
 
 
 @Composable

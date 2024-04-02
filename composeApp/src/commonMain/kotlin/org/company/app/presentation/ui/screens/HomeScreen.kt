@@ -1,4 +1,4 @@
-package org.company.app.ui.screens
+package org.company.app.presentation.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import org.company.app.domain.model.Wallpaper
 import org.company.app.theme.LocalThemeIsDark
-import org.company.app.ui.components.WallpaperList
+import org.company.app.presentation.ui.components.WallpaperList
 
 data class HomeScreen(
     val wallpaper: Wallpaper

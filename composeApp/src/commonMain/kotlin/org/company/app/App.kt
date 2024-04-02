@@ -19,8 +19,8 @@ import cafe.adriel.voyager.navigator.Navigator
 import org.company.app.domain.model.WallpaperState
 import org.company.app.domain.repository.Repository
 import org.company.app.theme.AppTheme
-import org.company.app.ui.screens.HomeScreen
-import org.company.app.viewmodel.MainViewModel
+import org.company.app.presentation.ui.screens.HomeScreen
+import org.company.app.presentation.viewmodel.MainViewModel
 
 @Composable
 internal fun App() = AppTheme {

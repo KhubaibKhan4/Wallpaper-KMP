@@ -1,4 +1,4 @@
-package org.company.app.viewmodel
+package org.company.app.presentation.viewmodel
 
 import com.rickclephas.kmm.viewmodel.KMMViewModel
 import com.rickclephas.kmm.viewmodel.coroutineScope
@@ -17,7 +17,7 @@ class MainViewModel(private val repository: Repository) : KMMViewModel() {
         viewModelScope.coroutineScope.launch {
             _wallpaperState.value = WallpaperState.Loading
             try {
-                val response = repository.getWallpaper(page, per_pag)
+                val response = repository.getWallpapers(page, per_pag)
                 _wallpaperState.value = WallpaperState.Success(response)
             } catch (e: Exception) {
                 _wallpaperState.value = WallpaperState.Loading
