@@ -1,4 +1,6 @@
-# Compose Multiplatform Application
+# Wallpaper-CMP
+Wallpaper CMP is developed using Kotlin Mutliplatform and Compose Multiplatform. It supports Android,iOS,Web & Desktop Applications. 
+
 
 ## Screenshot
 # Android + iOS Screenshots
