@@ -1,4 +1,6 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import java.io.FileInputStream
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.multiplatform)
@@ -148,9 +150,16 @@ libres {
 sqldelight {
     databases {
         create("WallpaperDatabase"){
-
+            packageName.set("com.wallpaper.db")
         }
     }
+}
+buildConfig {
+    val propertiesFile = rootProject.file("local.properties")
+    val properties = Properties()
+    properties.load(FileInputStream(propertiesFile))
+    val apiKey = properties.get("API_KEY")
+    buildConfigField("String","API_KEY","\"$apiKey\"")
 }
 tasks.getByPath("jvmProcessResources").dependsOn("libresGenerateResources")
 tasks.getByPath("jvmSourcesJar").dependsOn("libresGenerateResources")

@@ -1,5 +1,6 @@
 package org.company.app.data.remote
 
+import Wallpaper_KMP.composeApp.BuildConfig.API_KEY
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.HttpTimeout
@@ -11,7 +12,6 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import org.company.app.domain.model.Wallpaper
-import org.company.app.util.Constant.API_KEY
 import org.company.app.util.Constant.AUTHORIZATION
 
 object WallpaperClientApi {
