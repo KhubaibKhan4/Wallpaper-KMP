@@ -29,7 +29,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -39,7 +38,6 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -49,11 +47,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import com.seiko.imageloader.rememberImagePainter
-import io.ktor.http.Url
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import org.company.app.domain.model.Photo
-import org.company.app.presentation.ui.navigation.Screens
 import org.company.app.presentation.ui.screens.DetailsScreen
 
 
@@ -65,13 +59,11 @@ fun WallpaperList(
     LazyVerticalGrid(
         columns = GridCells.Adaptive(120.dp),
         state = state,
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
-
-        ) {
+        horizontalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
         items(photo) { photo ->
             WallpaperItem(photo = photo)
         }
-
     }
 
 }
@@ -81,8 +73,6 @@ fun WallpaperList(
 fun WallpaperItem(photo: Photo) {
 
     val navigator = LocalNavigator.current
-
-
     var liked by rememberSaveable {
         mutableStateOf(false)
     }
@@ -92,9 +82,9 @@ fun WallpaperItem(photo: Photo) {
             .padding(8.dp)
             .clickable {
                 navigator?.push(DetailsScreen(photo))
-            }// Increased padding for spacing
+            }
     ) {
-        // Apply a gradient background
+
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -117,24 +107,24 @@ fun WallpaperItem(photo: Photo) {
                 .shadow(4.dp, RoundedCornerShape(4.dp)),
         )
 
-        Spacer(modifier = Modifier.height(8.dp)) // Increased spacing
+        Spacer(modifier = Modifier.height(8.dp))
 
         Card(
             modifier = Modifier
                 .fillMaxSize()
                 .clip(shape = RoundedCornerShape(2.dp))
-                .padding(4.dp) // Increased padding
-                .shadow(2.dp, RoundedCornerShape(2.dp)) // Add shadow
+                .padding(4.dp)
+                .shadow(2.dp, RoundedCornerShape(2.dp))
         ) {
             Text(
                 text = photo.photographer,
                 style = TextStyle(
                     fontWeight = FontWeight.Bold,
-                    fontSize = 14.sp, // Adjust font size
-                    fontFamily = FontFamily.Serif, // Use a custom font family
-                    color = Color.Black // Customize text color
+                    fontSize = 14.sp,
+                    fontFamily = FontFamily.Serif,
+                    color = Color.Black
                 ),
-                modifier = Modifier.padding(8.dp), // Increased padding
+                modifier = Modifier.padding(8.dp),
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
                 textAlign = TextAlign.Start
