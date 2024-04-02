@@ -19,6 +19,7 @@ composeIcons = "1.1.0"
 kotlinx-serialization = "1.6.3"
 kotlinx-datetime = "0.5.0"
 multiplatformSettings = "1.1.1"
+moko-mvvm = "0.16.1"
 
 [libraries]
 
@@ -45,6 +46,8 @@ composeIcons-featherIcons = { module = "br.com.devsrsouza.compose.icons:feather"
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 multiplatformSettings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatformSettings" }
+moko-mvvm = { module = "dev.icerock.moko:mvvm-compose", version.ref = "moko-mvvm" }
+
 
 [plugins]
 

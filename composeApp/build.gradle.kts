@@ -50,13 +50,10 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.kotlinx.datetime)
             implementation(libs.multiplatformSettings)
-
             implementation(libs.ktor.client.logging)
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.ktor.client.content.negotiation)
-            api(libs.kmm.viewmodel.core)
-            api("io.github.qdsfdhvh:image-loader:1.7.0")
-            api("io.github.qdsfdhvh:image-loader-extension-moko-resources:1.7.0")
+            implementation(libs.moko.mvvm)
 
         }
 
