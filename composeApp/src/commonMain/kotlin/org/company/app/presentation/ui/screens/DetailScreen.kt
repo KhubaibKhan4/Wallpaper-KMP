@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.material.icons.filled.Fullscreen
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.Share
@@ -35,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -117,6 +119,7 @@ data class DetailsScreen(
                             .fillMaxWidth()
                             .height(300.dp)
                             .clip(RoundedCornerShape(4.dp)),
+                        contentScale = ContentScale.FillBounds
                     )
                     IconButton(
                         onClick = {
@@ -124,7 +127,11 @@ data class DetailsScreen(
                         },
                         modifier = Modifier.align(Alignment.BottomEnd)
                     ) {
-
+                        Icon(
+                            imageVector = Icons.Default.Fullscreen,
+                            contentDescription = photo.photographer,
+                            tint = Color.White
+                        )
                     }
                     IconButton(
                         onClick = {
