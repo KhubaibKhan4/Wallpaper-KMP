@@ -1,7 +1,7 @@
 package org.company.app.repository
 
 import org.company.app.domain.model.Wallpaper
-import org.company.app.data.network.WallpaperClientApi
+import org.company.app.data.remote.WallpaperClientApi
 
 class Repository {
 
