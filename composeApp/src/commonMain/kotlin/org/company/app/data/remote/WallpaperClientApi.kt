@@ -11,8 +11,8 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import org.company.app.domain.model.Wallpaper
-import org.company.app.util.Constant.Companion.API_KEY
-import org.company.app.util.Constant.Companion.AUTHORIZATION
+import org.company.app.util.Constant.API_KEY
+import org.company.app.util.Constant.AUTHORIZATION
 
 object WallpaperClientApi {
 
@@ -25,7 +25,7 @@ object WallpaperClientApi {
                 isLenient = false
                 ignoreUnknownKeys = true
                 encodeDefaults = false
-                explicitNulls  = false
+                explicitNulls = false
             })
 
         }
@@ -39,7 +39,7 @@ object WallpaperClientApi {
 
         defaultRequest {
             headers {
-                append(AUTHORIZATION,API_KEY)
+                append(AUTHORIZATION, API_KEY)
             }
         }
     }

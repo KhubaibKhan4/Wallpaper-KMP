@@ -17,7 +17,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.Navigator
 import org.company.app.domain.model.WallpaperState
-import org.company.app.repository.Repository
+import org.company.app.domain.repository.Repository
 import org.company.app.theme.AppTheme
 import org.company.app.ui.screens.HomeScreen
 import org.company.app.viewmodel.MainViewModel
