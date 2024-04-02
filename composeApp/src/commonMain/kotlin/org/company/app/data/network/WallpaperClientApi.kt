@@ -45,7 +45,6 @@ object WallpaperClientApi {
         defaultRequest {
             headers {
                 append(AUTHORIZATION,API_KEY)
-
             }
         }
     }
@@ -53,6 +52,5 @@ object WallpaperClientApi {
     suspend fun getWallpapers(per_page: Int, page: Int): Wallpaper {
         val url = "https://api.pexels.com/v1/curated?per_page=$per_page&page=$page"
         return client.get(url).body()
-
     }
 }
