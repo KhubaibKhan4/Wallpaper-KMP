@@ -1,6 +1,7 @@
 package org.company.app.presentation.ui.components
 
-import androidx.compose.foundation.Image
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -23,6 +24,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.sharp.Favorite
 import androidx.compose.material.icons.sharp.FavoriteBorder
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -37,6 +39,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -46,7 +49,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.navigator.LocalNavigator
-import com.seiko.imageloader.rememberImagePainter
+import io.kamel.core.Resource
+import io.kamel.image.KamelImage
+import io.kamel.image.asyncPainterResource
 import org.company.app.domain.model.Photo
 import org.company.app.presentation.ui.screens.DetailsScreen
 
@@ -95,16 +100,24 @@ fun WallpaperItem(photo: Photo) {
                 )
         )
 
-        val image = rememberImagePainter(photo.src.large2x)
-        Image(
-            painter = image, contentDescription = "null",
+        val image: Resource<Painter> = asyncPainterResource(photo.src.large2x)
+        KamelImage(
+            resource = image,
+            contentDescription = photo.photographer,
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .size(300.dp)
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .clip(RoundedCornerShape(4.dp))
-                .shadow(4.dp, RoundedCornerShape(4.dp)),
+                .clip(RoundedCornerShape(4.dp)),
+            onLoading = {
+                CircularProgressIndicator()
+            },
+            animationSpec = tween(
+                durationMillis = 200,
+                delayMillis = 100,
+                easing = LinearOutSlowInEasing
+            )
         )
 
         Spacer(modifier = Modifier.height(8.dp))

@@ -17,7 +17,7 @@ kotlinx-serialization = "1.6.3"
 kotlinx-datetime = "0.5.0"
 multiplatformSettings = "1.1.1"
 moko-mvvm = "0.16.1"
-
+kamelImage = "0.9.3"
 [libraries]
 
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
@@ -40,6 +40,7 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 multiplatformSettings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatformSettings" }
 moko-mvvm = { module = "dev.icerock.moko:mvvm-compose", version.ref = "moko-mvvm" }
+kamel-image = { module = "media.kamel:kamel-image", version.ref = "kamelImage" }
 
 
 [plugins]

@@ -1,6 +1,5 @@
 package org.company.app.presentation.ui.screens
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,7 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -43,26 +42,26 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
-import com.seiko.imageloader.rememberImagePainter
+import io.kamel.core.Resource
+import io.kamel.image.KamelImage
+import io.kamel.image.asyncPainterResource
 import org.company.app.domain.model.Photo
 import org.company.app.theme.LocalThemeIsDark
 
 
-
 data class DetailsScreen(
-    val photo: Photo
+    val photo: Photo,
 ) : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.current
         val uri = photo.url
         val uriHandler = LocalUriHandler.current
-
-
-
-
-
-        Column(modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing)) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .windowInsetsPadding(WindowInsets.safeDrawing)
+        ) {
 
             Row(
                 horizontalArrangement = Arrangement.Center,
@@ -80,7 +79,7 @@ data class DetailsScreen(
                     )
                 }
                 Text(
-                    text = "${photo.photographer}",
+                    text = photo.photographer,
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.padding(16.dp)
                 )
@@ -106,23 +105,21 @@ data class DetailsScreen(
                         start = 16.dp,
                         end = 16.dp,
                         bottom = 16.dp
-                    ), // Add padding for spacing
+                    ),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Box {
-                    val image = rememberImagePainter(photo.src.large2x)
-                    Image(
-                        painter = image, contentDescription = "null",
-                        contentScale = ContentScale.Crop,
+                    val image: Resource<Painter> = asyncPainterResource(data = photo.src.large2x)
+                    KamelImage(
+                        resource = image,
+                        contentDescription = photo.photographer,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(300.dp)
                             .clip(RoundedCornerShape(4.dp)),
-
-                        )
+                    )
                     IconButton(
                         onClick = {
-
 
                         },
                         modifier = Modifier.align(Alignment.BottomEnd)
@@ -139,61 +136,52 @@ data class DetailsScreen(
                     }
                 }
 
-
-                Spacer(modifier = Modifier.height(16.dp)) // Add spacing
-
-                // Photographer's name
+                Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = photo.photographer ?: "",
                     style = TextStyle(
                         fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp, // Customize font size
+                        fontSize = 18.sp,
                     )
                 )
 
-                Spacer(modifier = Modifier.height(16.dp)) // Add spacing
-
-                // Share and Download buttons
+                Spacer(modifier = Modifier.height(16.dp))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // Share button
                     Button(
                         onClick = {
                             uriHandler.openUri(uri)
                         },
                         modifier = Modifier
                             .wrapContentSize(),
-                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF007AFF)), // Customize button color
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF007AFF)),
                     ) {
                         Icon(
                             imageVector = Icons.Default.Share, contentDescription = null,
                             tint = Color.Black
                         )
-                        Spacer(modifier = Modifier.width(8.dp)) // Add spacing
+                        Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = "Share",
                             color = Color.Black
                         )
                     }
 
-                    Spacer(modifier = Modifier.width(16.dp)) // Add spacing
-
-
-                    // Download button
+                    Spacer(modifier = Modifier.width(16.dp))
                     Button(
                         onClick = {
 
                         },
                         modifier = Modifier
                             .wrapContentSize()
-                            .padding(horizontal = 10.dp), // Customize button height
-                        colors = ButtonDefaults.buttonColors(contentColor = Color(0xFF34C759)), // Customize button color
+                            .padding(horizontal = 10.dp),
+                        colors = ButtonDefaults.buttonColors(contentColor = Color(0xFF34C759)),
                     ) {
 
-                        Spacer(modifier = Modifier.width(8.dp)) // Add spacing
+                        Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = "Download"
                         )

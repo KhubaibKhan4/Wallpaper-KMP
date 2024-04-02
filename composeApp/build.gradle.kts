@@ -57,6 +57,7 @@ kotlin {
             implementation(project.dependencies.platform("io.insert-koin:koin-bom:3.5.1"))
             implementation("io.insert-koin:koin-core")
             implementation("io.insert-koin:koin-compose")
+            implementation(libs.kamel.image)
 
         }
 
