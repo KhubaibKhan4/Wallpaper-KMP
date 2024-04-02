@@ -6,6 +6,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.libres)
     alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.sqlDelight)
+    alias(libs.plugins.buildConfig)
 }
 
 kotlin {
@@ -58,6 +60,7 @@ kotlin {
             implementation("io.insert-koin:koin-core")
             implementation("io.insert-koin:koin-compose")
             implementation(libs.kamel.image)
+            implementation(libs.sqlDelight.extension)
 
         }
 
@@ -74,20 +77,24 @@ kotlin {
             implementation(project.dependencies.platform("io.insert-koin:koin-bom:3.5.1"))
             implementation("io.insert-koin:koin-core")
             implementation("io.insert-koin:koin-android")
+            implementation(libs.sqlDelight.driver.android)
         }
 
         jvmMain.dependencies {
             implementation(compose.desktop.common)
             implementation(compose.desktop.currentOs)
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.sqlDelight.driver.sqlite)
         }
 
         jsMain.dependencies {
             implementation(compose.html.core)
+            implementation(libs.sqlDelight.driver.js)
         }
 
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+            implementation(libs.sqlDelight.driver.native)
         }
 
     }
@@ -137,6 +144,13 @@ compose.experimental {
 
 libres {
     // https://github.com/Skeptick/libres#setup
+}
+sqldelight {
+    databases {
+        create("WallpaperDatabase"){
+
+        }
+    }
 }
 tasks.getByPath("jvmProcessResources").dependsOn("libresGenerateResources")
 tasks.getByPath("jvmSourcesJar").dependsOn("libresGenerateResources")
